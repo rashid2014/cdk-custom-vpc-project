@@ -65,16 +65,16 @@ export class CdkCustomVpcProjectStack extends Stack {
               // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
           }
       ],
-      tags: [{
-        key: 'key',
-        value: 'value',
-      }],
-      vpcId: 'vpcId',
+      // tags: [{
+      //   key: 'key',
+      //   value: 'value',
+      // }],
+      vpcId: vpc.vpcId,
     });
 
     const cfnSecurityGroupEC2 = new ec2.CfnSecurityGroup(this, 'CustomEC2SG', {
-      groupDescription: 'CustomALBSG',
-      groupName: 'CustomALBSG-2026',
+      groupDescription: 'CustomEC2SG',
+      groupName: 'CustomEC2SG-2026',
       securityGroupEgress: [{
         ipProtocol: '-1',
         cidrIp: '0.0.0.0/0',
@@ -83,32 +83,32 @@ export class CdkCustomVpcProjectStack extends Stack {
       securityGroupIngress: [
           {
               ipProtocol: 'tcp',
-              cidrIp: '0.0.0.0/0',
+              // cidrIp: '0.0.0.0/0',
               description: 'Inbound with Port 80',
               fromPort: 80,
               toPort: 80,
               // sourcePrefixListId: 'sourcePrefixListId',
-              // sourceSecurityGroupId: 'sourceSecurityGroupId',
+              sourceSecurityGroupId: cfnSecurityGroup.attrId,
               // sourceSecurityGroupName: 'sourceSecurityGroupName',
               // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
           },
           {
-              ipProtocol: 'tcp',
-              cidrIp: '0.0.0.0/0',
-              description: 'Inbound with Port 80',
-              fromPort: 443,
-              toPort: 443,
-              // sourcePrefixListId: 'sourcePrefixListId',
-              // sourceSecurityGroupId: 'sourceSecurityGroupId',
-              // sourceSecurityGroupName: 'sourceSecurityGroupName',
-              // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
-          }
+            ipProtocol: 'tcp',
+            // cidrIp: '0.0.0.0/0',
+            description: 'Inbound with Port 80',
+            fromPort: 443,
+            toPort: 443,
+            // sourcePrefixListId: 'sourcePrefixListId',
+            sourceSecurityGroupId: cfnSecurityGroup.attrId,
+            // sourceSecurityGroupName: 'sourceSecurityGroupName',
+            // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
+          },
       ],
-      tags: [{
-        key: 'key',
-        value: 'value',
-      }],
-      vpcId: 'vpcId',
+      // tags: [{
+      //   key: 'key',
+      //   value: 'value',
+      // }],
+      vpcId: vpc.vpcId,
     });
     
   }
