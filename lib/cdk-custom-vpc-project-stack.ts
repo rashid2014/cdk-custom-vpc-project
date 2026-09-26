@@ -126,6 +126,38 @@ export class CdkCustomVpcProjectStack extends Stack {
       parameterName: '/project/custom/ec2/sg/id',
       stringValue: cfnSecurityGroupEC2.attrId,
     });
+
+    const publicSubnet1Parameter = new ssm.StringParameter(this,'CustomPublicSubnet1Parameter',{
+      parameterName: '/project/custom/public/subnet1/id',
+      stringValue: vpc.publicSubnets[0].subnetId,
+    }); 
+
+    const publicSubnet2Parameter = new ssm.StringParameter(this,'CustomPublicSubnet2Parameter',{
+      parameterName: '/project/custom/public/subnet2/id',
+      stringValue: vpc.publicSubnets[1].subnetId,
+    });
+
+    const publicSubnet3Parameter = new ssm.StringParameter(this,'CustomPublicSubnet3Parameter',{
+      parameterName: '/project/custom/public/subnet3/id',
+      stringValue: vpc.publicSubnets[2].subnetId,
+    });
+
+    const privateSubnet1Parameter = new ssm.StringParameter(this,'CustomPrivateSubnet1Parameter',{
+      parameterName: '/project/custom/private/subnet1/id',
+      stringValue: vpc.privateSubnets[0].subnetId,
+    }); 
+
+    const privateSubnet2Parameter = new ssm.StringParameter(this,'CustomPrivateSubnet2Parameter',{
+      parameterName: '/project/custom/private/subnet2/id',
+      stringValue: vpc.privateSubnets[1].subnetId,
+    }); 
+
+    const privateSubnet3Parameter = new ssm.StringParameter(this,'CustomPrivateSubnet3Parameter',{
+      parameterName: '/project/custom/private/subnet3/id',
+      stringValue: vpc.privateSubnets[2].subnetId,
+    });
+
+    
     
   }
 }
