@@ -117,6 +117,20 @@ export class CdkCustomVpcProjectStack extends Stack {
       value: vpc.vpcId,
       name: '/project/custom/vpc/id'
     });
+
+    const albSGParameter = new ssm.CfnParameter(this, 'ALBSGParameter', {
+      type: 'string',
+      value: cfnSecurityGroup.attrId,
+      name: '/project/custom/alb/sg/id'
+    });
+
+    const ec2SGParameter = new ssm.CfnParameter(this, 'EC2SGParameter', {
+      type: 'string',
+      value: cfnSecurityGroupEC2.attrId,
+      name: '/project/custom/ec2/sg/id'
+    });
+
+    
     
   }
 }
