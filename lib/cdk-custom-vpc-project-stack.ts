@@ -32,6 +32,84 @@ export class CdkCustomVpcProjectStack extends Stack {
       ]
 
     });
+
+    const cfnSecurityGroup = new ec2.CfnSecurityGroup(this, 'CustomALBSG', {
+      groupDescription: 'CustomALBSG',
+      groupName: 'CustomALBSG-2026',
+      securityGroupEgress: [{
+        ipProtocol: '-1',
+        cidrIp: '0.0.0.0/0',
+        description: 'AllOutbound'
+      }],
+      securityGroupIngress: [
+          {
+              ipProtocol: 'tcp',
+              cidrIp: '0.0.0.0/0',
+              description: 'Inbound with Port 80',
+              fromPort: 80,
+              toPort: 80,
+              // sourcePrefixListId: 'sourcePrefixListId',
+              // sourceSecurityGroupId: 'sourceSecurityGroupId',
+              // sourceSecurityGroupName: 'sourceSecurityGroupName',
+              // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
+          },
+          {
+              ipProtocol: 'tcp',
+              cidrIp: '0.0.0.0/0',
+              description: 'Inbound with Port 80',
+              fromPort: 443,
+              toPort: 443,
+              // sourcePrefixListId: 'sourcePrefixListId',
+              // sourceSecurityGroupId: 'sourceSecurityGroupId',
+              // sourceSecurityGroupName: 'sourceSecurityGroupName',
+              // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
+          }
+      ],
+      tags: [{
+        key: 'key',
+        value: 'value',
+      }],
+      vpcId: 'vpcId',
+    });
+
+    const cfnSecurityGroupEC2 = new ec2.CfnSecurityGroup(this, 'CustomEC2SG', {
+      groupDescription: 'CustomALBSG',
+      groupName: 'CustomALBSG-2026',
+      securityGroupEgress: [{
+        ipProtocol: '-1',
+        cidrIp: '0.0.0.0/0',
+        description: 'AllOutbound'
+      }],
+      securityGroupIngress: [
+          {
+              ipProtocol: 'tcp',
+              cidrIp: '0.0.0.0/0',
+              description: 'Inbound with Port 80',
+              fromPort: 80,
+              toPort: 80,
+              // sourcePrefixListId: 'sourcePrefixListId',
+              // sourceSecurityGroupId: 'sourceSecurityGroupId',
+              // sourceSecurityGroupName: 'sourceSecurityGroupName',
+              // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
+          },
+          {
+              ipProtocol: 'tcp',
+              cidrIp: '0.0.0.0/0',
+              description: 'Inbound with Port 80',
+              fromPort: 443,
+              toPort: 443,
+              // sourcePrefixListId: 'sourcePrefixListId',
+              // sourceSecurityGroupId: 'sourceSecurityGroupId',
+              // sourceSecurityGroupName: 'sourceSecurityGroupName',
+              // sourceSecurityGroupOwnerId: 'sourceSecurityGroupOwnerId',
+          }
+      ],
+      tags: [{
+        key: 'key',
+        value: 'value',
+      }],
+      vpcId: 'vpcId',
+    });
     
   }
 }
