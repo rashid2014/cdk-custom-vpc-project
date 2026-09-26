@@ -154,7 +154,7 @@ export class CdkCustomVpcProjectStack extends Stack {
 
     // const privateSubnet3Parameter = new ssm.StringParameter(this,'CustomPrivateSubnet3Parameter',{
     //   parameterName: '/project/custom/private/subnet3/id',
-    //   stringValue: vpc.privateSubnets[2].subnetId,
+    //   stringValue: vpc.isolatedSubnets[2].subnetId,
     // });
 
     
