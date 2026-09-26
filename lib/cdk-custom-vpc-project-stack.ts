@@ -3,6 +3,7 @@ import { Duration, Stack, StackProps } from 'aws-cdk-lib/core';
 // import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
 
 export class CdkCustomVpcProjectStack extends Stack {
@@ -109,6 +110,12 @@ export class CdkCustomVpcProjectStack extends Stack {
       //   value: 'value',
       // }],
       vpcId: vpc.vpcId,
+    });
+
+    const vpcParameter = new ssm.CfnParameter(this, 'CustomVPCParameter', {
+      type: 'string',
+      value: vpc.vpcId,
+      name: '/project/custom/vpc/id'
     });
     
   }
